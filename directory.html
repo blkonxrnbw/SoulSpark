@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SoulSpark Community Directory</title>
+  <meta name="description" content="Practitioners, collaborators and allies in the SoulSpark spiritual & wellness community.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="icon" href="img/logo.png">
+  <link rel="stylesheet" href="style.css">
+  <script src="core.js" defer></script>
+  <script src="directory.js" defer></script>
+</head>
+<body class="dirpage">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="hero">
+    <p class="eyebrow">✦ Community Directory</p>
+    <h1>The SoulSpark Community</h1>
+    <p>Practitioners, collaborators and allies in the spiritual &amp; wellness space.</p>
+    <p id="season" class="season-line">Reading the sky…</p>
+  </header>
+
+  <main id="main" class="dir-main">
+    <div class="searchbar">
+      <input id="q" type="search" autocomplete="off" aria-label="Search the directory"
+             placeholder="Search this section…" title="Tip: try hd:projector, sun:scorpio, auth:emotional or level:advanced">
+      <select id="level" class="people-only" aria-label="Experience level">
+        <option value="">All experience levels</option>
+        <option value="newbie">🌱 Newbie</option>
+        <option value="intermediate">🌿 Intermediate</option>
+        <option value="advanced">🌳 Advanced</option>
+      </select>
+      <label class="chk people-only"><input type="checkbox" id="aligned"> Aligned now</label>
+      <button type="button" id="reset" class="btn ghost sm">Show all</button>
+      <span id="count" class="muted" role="status"></span>
+    </div>
+    <nav id="secs" class="chips secs" aria-label="Sections"></nav>
+    <h2 id="secHead" class="sechead"></h2>
+    <div id="mods" class="chips sm people-only" aria-label="Filter by modality"></div>
+
+    <div id="lock" class="panel lockpanel" hidden>
+      <h2>🔒 <span id="lockName">This section</span> is private</h2>
+      <p class="muted">Enter the access code you were given to see it.</p>
+      <button type="button" class="btn" id="unlock">🔑 Enter code</button>
+    </div>
+    <p id="status" class="empty" role="status">Loading the community…</p>
+    <div id="grid" class="grid"></div>
+  </main>
+
+  <footer class="foot">
+    <a href="index.html#join">✦ List your practice</a> · <a href="index.html">Open the full SoulSpark guide</a>
+  </footer>
+
+  <dialog id="detail"><button class="icon close" data-close aria-label="Close">✕</button><div id="detailBody"></div></dialog>
+  <div id="toasts" class="toasts" aria-live="polite"></div>
+</body>
+</html>

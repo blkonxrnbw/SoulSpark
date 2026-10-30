@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SoulSpark Resource Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="icon" href="img/logo.png">
+  <link rel="stylesheet" href="style.css">
+  <script src="core.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="top">
+    <div class="brand">
+      <h1><img src="img/logo.webp" alt="" width="34" height="34"> SoulSpark</h1>
+      <p id="season" class="season">Reading the sky…</p>
+    </div>
+    <nav class="tabs" aria-label="Views">
+      <button data-view="directory" aria-current="page">Directory</button>
+      <button data-view="explore">Explore</button>
+      <button data-view="match">Match</button>
+      <button data-view="calendar">Calendar</button>
+      <button data-view="mandala">Mandala</button>
+      <button data-view="insights">Insights</button>
+      <button data-view="add">Add</button>
+      <button data-view="inbox" id="inboxTab" hidden>Inbox</button>
+    </nav>
+    <div class="tools">
+      <button id="joinBtn" class="pill join">✦ List your practice</button>
+      <a class="pill link-pill" href="dmm.html">🌙 DMM</a>
+      <span id="sync" class="pill" role="status" title="Offline">Offline</span>
+      <button id="settingsBtn" class="icon" aria-label="Settings">⚙</button>
+      <button id="acctBtn" class="acct">Sign in</button>
+    </div>
+  </header>
+
+  <main id="main">
+    <p id="lockNote" class="banner lock" hidden role="status"></p>
+    <section id="directory" class="view on">
+      <div class="searchbar">
+        <input id="q" type="search" autocomplete="off" aria-label="Search"
+               placeholder="Search ( / ) — or  hd:projector  sun:scorpio  auth:emotional  level:advanced  tag:vip">
+        <label class="chk"><input type="checkbox" id="syncOnly"> Aligned now</label>
+        <button id="selectBtn" class="btn ghost sm">☐ Select</button>
+        <button id="printBtn" class="btn ghost sm" title="Print or save the shown cards as a PDF">⎙ Print</button>
+        <span id="count" class="muted"></span>
+      </div>
+      <div class="chiprow">
+        <div id="chips" class="chips"></div>
+        <button id="arrangeChips" class="link" aria-pressed="false">⇅ Arrange</button><button class="link" hidden>Reset</button>
+      </div>
+      <div id="grid" class="grid"></div>
+      <p id="empty" class="empty" hidden>No matches — try fewer words.</p>
+    </section>
+
+    <section id="explore" class="view">
+      <div class="explore">
+        <aside class="mside">
+          <input id="mq" type="search" autocomplete="off" placeholder="Search modalities…" aria-label="Search modalities">
+          <div id="mcats" class="chips sm"></div>
+          <nav id="mlist" class="mlist" aria-label="Modalities"></nav>
+        </aside>
+        <article id="mdetail" class="panel mdetail" aria-live="polite"></article>
+      </div>
+    </section>
+
+    <section id="match" class="view">
+      <div class="match">
+        <form id="matchForm" class="panel stack">
+          <h2>Find your practitioner</h2>
+          <p class="muted">Tell us what you’re looking for. Every match shows why it was suggested. Training path and years of practice are shown but never change the order.</p>
+          <label>What would you like support with?<textarea name="need" rows="3" placeholder="e.g. grief, tension in my body, clarity on a career change"></textarea></label>
+          <div><p class="q">Modalities you’re drawn to <span class="muted">(optional)</span></p><div class="suggest" id="mmods"></div></div>
+          <div class="fields">
+            <label>How would you like to meet?<select name="format"><option value="">Either</option><option>Online</option><option>In person</option></select></label>
+            <label>Near (city)<input name="near" placeholder="Norfolk" autocomplete="address-level2"></label>
+          </div>
+          <details><summary>Add your own alignment <span class="muted">(optional, for resonance)</span></summary>
+            <div class="fields"><label>Your Sun sign<select name="sun"></select></label><label>Your Human Design type<select name="hd"></select></label></div>
+          </details>
+          <button class="btn">Find matches</button>
+        </form>
+        <div id="matchOut" aria-live="polite"><p class="empty">Your matches will appear here.</p></div>
+      </div>
+    </section>
+
+    <section id="calendar" class="view">
+      <div class="calbar" id="calNav">
+        <button class="icon" data-cal="-1" aria-label="Previous month">‹</button>
+        <h2 id="calTitle" aria-live="polite"></h2>
+        <button class="icon" data-cal="1" aria-label="Next month">›</button>
+        <button class="btn ghost sm" data-cal="today">Today</button>
+        <button class="btn ghost sm" data-cal="ics">⤓ Export .ics</button>
+      </div>
+      <div class="cal">
+        <div id="calGrid" class="calgrid"></div>
+        <aside class="panel"><h2 id="agendaTitle">Next 60 days</h2><ul id="agenda" class="agenda"></ul></aside>
+      </div>
+    </section>
+
+    <section id="mandala" class="view">
+      <div id="modes" class="chips"></div>
+      <div class="stage"><canvas id="cv"></canvas><div id="tip" class="tip" hidden></div></div>
+      <div id="legend" class="legend"></div>
+    </section>
+
+    <section id="insights" class="view"><div id="insightsBody" class="panels"></div></section>
+
+    <section id="add" class="view">
+      <form id="form" class="form">
+        <div class="formhead">
+          <h2 id="formTitle">Add an entry</h2>
+          <button type="button" id="arrangeFields" class="link" aria-pressed="false">⇅ Arrange</button><button type="button" class="link" hidden>Reset</button>
+        </div>
+        <label>Section <select id="formSec"></select></label>
+        <p id="formLock" class="banner lock" hidden></p>
+        <div id="draftNote"></div>
+        <div id="anon" class="fields">
+          <label>Your name <input name="submitter_name" autocomplete="name"></label>
+          <label>Your email <input name="submitter_email" type="email" autocomplete="email"></label>
+          <label>Trusted PIN (optional) <input name="_trusted_pin" autocomplete="off"></label>
+        </div>
+        <label class="hp" aria-hidden="true">Leave blank <input name="_hp" tabindex="-1" autocomplete="off"></label>
+        <div id="fields" class="fields"></div>
+        <div class="row sticky">
+          <button class="btn" id="formSubmit">Submit</button>
+          <button type="button" class="btn ghost" id="formCancel" hidden>Cancel</button>
+          <p id="formMsg" class="muted" role="status"></p>
+        </div>
+      </form>
+    </section>
+
+    <section id="inbox" class="view"><div id="inboxList"></div></section>
+  </main>
+
+  <div id="bulk" class="bulkbar" hidden role="toolbar" aria-label="Bulk actions">
+    <b id="bulkCount">0 selected</b>
+    <button class="btn ghost sm" data-bulk="all">Select all shown</button>
+    <button class="btn ghost sm" data-bulk="csv">⤓ CSV</button>
+    <span data-need="2" class="tagin"><input id="bulkTag" placeholder="Tag…" aria-label="Tag to add"><button class="btn ghost sm" data-bulk="tag" data-need="2">+ Tag</button></span>
+    <button class="btn ghost sm" data-bulk="merge" data-need="2">⊕ Merge</button>
+    <button class="btn bad sm" data-bulk="delete" data-need="3">Delete</button>
+  </div>
+
+  <dialog id="detail"><button class="icon close" data-close aria-label="Close">✕</button><div id="detailBody"></div></dialog>
+  <dialog id="merge" class="wide"><button class="icon close" data-close aria-label="Close">✕</button><div id="mergeBody"></div></dialog>
+  <dialog id="account"><button class="icon close" data-close aria-label="Close">✕</button><div id="acctBody"></div></dialog>
+  <dialog id="confirm" class="narrow">
+    <form method="dialog"><p id="confirmMsg"></p>
+      <div class="row"><button class="btn bad" value="yes" id="confirmOk">Confirm</button><button class="btn ghost" value="no">Cancel</button></div>
+    </form>
+  </dialog>
+  <dialog id="settings">
+    <button class="icon close" data-close aria-label="Close">✕</button>
+    <h2>Section visibility</h2>
+    <div id="visList" class="vis"></div>
+    <h2>Connection</h2>
+    <label>Web App URL <input id="apiUrl" type="url"></label>
+    <button id="saveSettings" class="btn">Save &amp; sync</button>
+    <h2>Section codes</h2>
+    <p class="muted">Each section opens with its own access code (default 0000). Organizers change them in the sheet’s 🔑 Section Codes tab.</p>
+    <div class="row"><button type="button" class="btn ghost sm" data-unlock="">🔑 Enter a code</button>
+      <button type="button" id="forgetCodes" class="btn ghost sm">Forget codes on this device</button></div>
+    <section id="importBox" hidden>
+      <h2>Import data</h2>
+      <p class="muted">A CSV for one section (first row = column names), or a JSON backup from the old SoulSpark app. Entries are matched by name:
+        new names are added, existing ones only get their blank fields filled. To pull in the old Resource Guide Tracker sheet, see <code>importTracker</code> in Code.gs.</p>
+      <div class="row"><select id="impSec" aria-label="Section for CSV"></select><input type="file" id="impFile" accept=".csv,.json,text/csv,application/json" aria-label="File to import"></div>
+      <button class="btn ghost sm" id="impOld" hidden></button>
+      <p id="impMsg" class="muted" role="status"></p>
+    </section>
+  </dialog>
+  <div id="toasts" class="toasts" aria-live="polite"></div>
+</body>
+</html>

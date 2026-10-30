@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DMM Gathering Intake</title>
+  <meta name="description" content="Divine Melanated Mystics — tell us what you want to gather around.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="icon" href="img/logo.png">
+  <link rel="stylesheet" href="style.css">
+  <script src="core.js" defer></script>
+  <script src="dmm.js" defer></script>
+</head>
+<body class="dmm">
+  <header class="hero">
+    <p class="eyebrow">🌙 Divine Melanated Mystics</p>
+    <h1>Help shape our next gathering</h1>
+    <p>Tell us what calls you, how you like to gather, and whether you’d like to hold space. Takes about three minutes.</p>
+    <nav class="seg dark" id="dmmTabs" hidden>
+      <button type="button" data-tab="intake" aria-selected="true">Intake form</button>
+      <button type="button" data-tab="responses" aria-selected="false">Responses</button>
+    </nav>
+  </header>
+
+  <main id="main" class="narrow-main">
+    <section id="intake" class="view on">
+      <div id="draftNote"></div>
+      <form id="dmmForm" class="form" novalidate>
+        <label class="hp" aria-hidden="true">Leave blank <input name="_hp" tabindex="-1" autocomplete="off"></label>
+
+        <fieldset><legend><span>1</span> About you</legend>
+          <div class="fields">
+            <label>Name <input name="dmm_name" required autocomplete="name"></label>
+            <label>Email <input name="dmm_email" type="email" autocomplete="email"></label>
+            <label>Phone <input name="dmm_phone" type="tel" autocomplete="tel"></label>
+            <label>Signal handle <input name="dmm_signal_handle" placeholder="@name.01"></label>
+          </div>
+          <p class="muted">Your contact details are only visible to the DMM organizers.</p>
+        </fieldset>
+
+        <fieldset><legend><span>2</span> What should we gather around?</legend>
+          <label>Topics you’d love to explore <textarea name="dmm_discussion_topics" rows="3" placeholder="Ancestral veneration, dream work, herbal allies…"></textarea></label>
+          <p class="q">Formats that feel good</p>
+          <div class="toggles" id="formats"></div>
+        </fieldset>
+
+        <fieldset><legend><span>3</span> When works for you?</legend>
+          <div class="toggles" id="avail"></div>
+        </fieldset>
+
+        <fieldset><legend><span>4</span> Would you like to hold space?</legend>
+          <label>Topics you could facilitate <textarea name="dmm_facilitate_topics" rows="2" placeholder="Leave blank if not right now"></textarea></label>
+          <div class="fields">
+            <label>Session length <select name="dmm_facilitate_length"><option value=""></option>
+              <option>30 minutes</option><option>60 minutes</option><option>90 minutes</option><option>Half day</option><option>Multi-session series</option></select></label>
+          </div>
+          <label>Anything we should know? <textarea name="dmm_facilitate_notes" rows="2" placeholder="Materials, space needs, accessibility…"></textarea></label>
+        </fieldset>
+
+        <fieldset><legend><span>5</span> Last bits</legend>
+          <label>Suggestions for the collective <textarea name="dmm_general_suggestions" rows="2"></textarea></label>
+          <div class="fields">
+            <label>How did you hear about us? <input name="dmm_referral"></label>
+          </div>
+          <p class="q">Join the DMM Signal group?</p>
+          <div class="toggles" role="radiogroup">
+            <label class="toggle"><input type="radio" name="dmm_signal" value="Yes"> Yes, add me</label>
+            <label class="toggle"><input type="radio" name="dmm_signal" value="Maybe"> Maybe later</label>
+            <label class="toggle"><input type="radio" name="dmm_signal" value="No"> No thanks</label>
+          </div>
+        </fieldset>
+
+        <div class="row sticky">
+          <button class="btn" id="dmmSubmit">Send ✦</button>
+          <p id="dmmMsg" class="muted" role="status"></p>
+        </div>
+      </form>
+      <div id="thanks" class="panel thanks" hidden tabindex="-1"></div>
+    </section>
+
+    <section id="responses" class="view">
+      <div class="row"><button class="btn ghost sm" id="dmmRefresh">↻ Refresh</button><button class="btn ghost sm" id="dmmCsv">⤓ Export CSV</button>
+        <span class="muted" id="dmmStamp"></span></div>
+      <div id="dash" class="panels"></div>
+    </section>
+  </main>
+
+  <footer class="foot"><a href="index.html">✦ SoulSpark Resource Guide</a></footer>
+  <div id="toasts" class="toasts" aria-live="polite"></div>
+</body>
+</html>
